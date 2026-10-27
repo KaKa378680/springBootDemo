@@ -14,6 +14,8 @@ import lombok.Getter;
 public enum ReturnCode {
     Success(10000,"调用成功"),
     REG_NAME_DUP(10001,"用户名已存在"),
+    LOGIN_SUCCESS(20001,"登录成功"),
+    LOGIN_FAILED(20002,"登录失败"),
     ADD_PROD_FAILED(30001,"商品已存在"),
     SYSTEM_ERROR(500,"系统异常");
     private Integer code;

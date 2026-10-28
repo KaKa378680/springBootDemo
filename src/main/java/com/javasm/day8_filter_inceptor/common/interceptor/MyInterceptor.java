@@ -1,11 +1,13 @@
 package com.javasm.day8_filter_inceptor.common.interceptor;
 
+import com.javasm.day8_filter_inceptor.common.exception.JavasmException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.javasm.day8_filter_inceptor.common.resp.ReturnCode;
 /**
  * @author : ping
  * @className: MyInterceptor
@@ -18,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //preHandle 前置处理
         System.out.println("前置执行了...");
         //根据返回值，决定请求是否继续向下传递
         return true;

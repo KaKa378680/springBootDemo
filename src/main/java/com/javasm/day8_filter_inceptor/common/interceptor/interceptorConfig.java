@@ -22,11 +22,18 @@ public class interceptorConfig implements WebMvcConfigurer {
     @Resource
     private MyInterceptor myInterceptor;
 
+    @Resource
+    private LoginInterceptor loginInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(myInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login")
                 .order(1);
+
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login/dologin")
+                .order(2);
     }
 }

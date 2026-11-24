@@ -1,5 +1,6 @@
 package com.javasm.day8_filter_inceptor.common.aspact;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -29,7 +30,14 @@ public class MyAspact {
     //细颗粒度(切到方法) execution(com.github.pagehelper.PageInfo com.javasm.day8_filter_inceptor.user.service.impl.UserServiceImpl.listBy*(..))
     //通过模糊匹配 可以切同一类结构的方法
     @Before("MyPointcut2()")
-    public void MyBefore() {
+    public void MyBefore(JoinPoint joinPoint) {
+        //joinPoint 目标方法
+        //获得方法签名 getSignature()
+        System.out.println(joinPoint.getSignature().getName());
+        for (Object arg : joinPoint.getArgs()) {
+            System.out.println(arg);
+        }
         System.out.println("MyBefore执行了...");
     }
+
 }

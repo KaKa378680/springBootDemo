@@ -1,6 +1,7 @@
 package com.javasm.day8_filter_inceptor.common.aspact;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -19,18 +20,18 @@ import org.springframework.stereotype.Component;
 public class MyAspact {
     //单独定义切点
     @Pointcut("within(com.javasm.day8_filter_inceptor.user.service.impl.UserServiceImpl)")
-    public void MyPointcut1() {}
+    public void myPointcut1() {}
 
     @Pointcut("execution(com.github.pagehelper.PageInfo com.javasm.day8_filter_inceptor.user.service.impl.UserServiceImpl.listBy*(..))")
-    public void MyPointcut2() {}
+    public void myPointcut2() {}
 
     //可以自定义方法 定义要执行的公共方法
     //前置通知
     //粗颗粒度(切到类) within(com.javasm.day8_filter_inceptor.user.service.impl.UserServiceImpl)
     //细颗粒度(切到方法) execution(com.github.pagehelper.PageInfo com.javasm.day8_filter_inceptor.user.service.impl.UserServiceImpl.listBy*(..))
     //通过模糊匹配 可以切同一类结构的方法
-    @Before("MyPointcut2()")
-    public void MyBefore(JoinPoint joinPoint) {
+    @Before("myPointcut2()")
+    public void myBefore(JoinPoint joinPoint) {
         //joinPoint 目标方法
         //获得方法签名 getSignature()
         System.out.println(joinPoint.getSignature().getName());
@@ -39,5 +40,16 @@ public class MyAspact {
         }
         System.out.println("MyBefore执行了...");
     }
+
+    @AfterReturning(pointcut = "myPointcut2()",returning = "resObj")
+    public void myAfterReturning(Object resObj,JoinPoint joinPoint) {
+        //joinPoint 目标方法
+        //需要配置返回值类型相同的方法，方便统一处理
+        //如果代码中出现异常 后置通知不执行
+        System.out.println(resObj);
+        System.out.println("myAfterReturning执行了....");
+    }
+
+
 
 }

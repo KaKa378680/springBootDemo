@@ -39,7 +39,7 @@ public class MyAspact {
     }
 
     @AfterReturning(pointcut = "myPointcut2()",returning = "resObj")
-    public void myAfterReturning(Object resObj,JoinPoint joinPoint) {
+    public void myAfterReturning(JoinPoint joinPoint,Object resObj) {
         //joinPoint 目标方法
         //需要配置返回值类型相同的方法，方便统一处理
         //如果代码中出现异常 后置通知不执行
@@ -51,8 +51,8 @@ public class MyAspact {
     @AfterThrowing(pointcut = "myPointcut2()",throwing = "e")
     public void myAfterThrowing(JoinPoint joinPoint,Throwable e) {
         //joinPoint 目标方法
-        System.out.println(e.getMessage());
-        System.out.println("myAfterReturning执行了....");
+        System.out.println("asd"+e.getMessage());
+        System.out.println("myAfterThrowing执行了....");
     }
 
 }

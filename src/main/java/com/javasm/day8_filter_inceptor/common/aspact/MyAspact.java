@@ -1,10 +1,7 @@
 package com.javasm.day8_filter_inceptor.common.aspact;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -50,6 +47,12 @@ public class MyAspact {
         System.out.println("myAfterReturning执行了....");
     }
 
-
+    //异常通知，专门处理异常情况
+    @AfterThrowing(pointcut = "myPointcut2()",throwing = "e")
+    public void myAfterThrowing(JoinPoint joinPoint,Throwable e) {
+        //joinPoint 目标方法
+        System.out.println(e.getMessage());
+        System.out.println("myAfterReturning执行了....");
+    }
 
 }
